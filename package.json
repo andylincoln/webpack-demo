@@ -11,6 +11,10 @@
     "webpack-merge": "^0.14.1",
     "webpack-validator": "^2.2.7"
   },
+  "bin" : {
+    "webpack-dev-server" : "node_modules/.bin/webpack-dev-server",
+    "webpack" : "node_modules/.bin/webpack"
+  },
   "scripts": {
     "start": "webpack-dev-server",
     "build": "webpack",
