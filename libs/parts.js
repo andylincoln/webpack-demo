@@ -40,37 +40,54 @@ exports.devServer = function(options) {
       })
     ]
   };
+}
 
-  exports.minify = function() {
-    return {
-      plugins: [
-        new webpack.optimize.UglifyJsPlugin({
-          comments: false,
-          beautify: false,
-          compress: {
-            warnings: false,
-          },
-          mangle: {
-            except: ['webpackJsonp'],
-            // Don't care about IE8
-            screw_ie8 : true,
-          }
-        })
+exports.minify = function() {
+  return {
+    plugins: [
+      new webpack.optimize.UglifyJsPlugin({
+        comments: false,
+        beautify: false,
+        compress: {
+          warnings: false,
+        },
+        mangle: {
+          except: ['webpackJsonp'],
+          // Don't care about IE8
+          screw_ie8 : true,
+        }
+      })
+    ]
+  };
+}
+
+exports.setupCSS = function(paths) {
+  return {
+    module: {
+      loaders: [
+        {
+          test: /\.css$/,
+          loaders: ['style', 'css'],
+          include: paths
+        }
       ]
-    };
-  }
-  exports.setupCSS = function(paths) {
-    return {
-      module: {
-        loaders: [
-          {
-            test: /\.css$/,
-            loaders: ['style', 'css'],
-            include: paths
-          }
-        ]
-      }
-    };
-  }
+    }
+  };
+}
 
+exports.extractBundle = function(options) {
+  const entry = {};
+  entry[options.name] = options.entries;
+
+  return {
+    // Define an entry point needed for splitting.
+    entry: entry,
+    plugins: [
+      // Extract bundle and manifest files. Manifest is
+      // needed for reliable caching.
+      new webpack.optimize.CommonsChunkPlugin({
+        names: [options.name, 'manifest']
+      })
+    ]
+  };
 }
