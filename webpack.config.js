@@ -38,32 +38,16 @@ switch(process.env.npm_lifecycle_event) {
     {
       devtool: 'source-map'
     },
-<<<<<<< HEAD
     parts.minify(),
-    parts.setupCSS(PATHS.app)
-    );
-    break;
-=======
     parts.setupCSS(PATHS.app)
   );
   break;
->>>>>>> eaa9e11523764efd0a6cceb764814a3e40a5c1d3
 
   default:
   config = merge(
     common,
     {
-<<<<<<< HEAD
      devtool: 'eval-source-map'
-    },
-    parts.devServer({
-       // Customize host/port here if needed
-       host: process.env.HOST,
-       port: process.env.PORT
-    })
- );
-=======
-      devtool: 'eval-source-map'
     },
     parts.setupCSS(PATHS.app),
     parts.devServer({
@@ -73,7 +57,6 @@ switch(process.env.npm_lifecycle_event) {
     })
   );
 
->>>>>>> eaa9e11523764efd0a6cceb764814a3e40a5c1d3
 }
 
 module.exports = validate(config);
