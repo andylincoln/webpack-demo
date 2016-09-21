@@ -49,7 +49,7 @@ exports.devServer = function(options) {
           beautify: false,
           compress: {
             warnings: false,
-          }
+          },
           mangle: {
             except: ['webpackJsonp'],
             // Don't care about IE8
