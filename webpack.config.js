@@ -33,19 +33,28 @@ var config;
 switch(process.env.npm_lifecycle_event) {
 
   case "build":
-    config = merge(common, {});
+  config = merge(
+    common,
+    {
+      devtool: 'source-map'
+    },
+    parts.minify(),
+    parts.setupCSS(PATHS.app)
+    );
     break;
 
   default:
   config = merge(
-   common,
-   parts.devServer({
-     // Customize host/port here if needed
-     host: process.env.HOST,
-     port: process.env.PORT
-   })
+    common,
+    {
+     devtool: 'eval-source-map'
+    },
+    parts.devServer({
+       // Customize host/port here if needed
+       host: process.env.HOST,
+       port: process.env.PORT
+    })
  );
-
 }
 
 module.exports = validate(config);

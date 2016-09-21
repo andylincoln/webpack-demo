@@ -40,4 +40,23 @@ exports.devServer = function(options) {
       })
     ]
   };
+
+  exports.minify = function() {
+    return {
+      plugins: [
+        new webpack.optimize.UglifyJsPlugin({
+          comments: false,
+          beautify: false,
+          compress: {
+            warnings: false,
+          }
+          mangle: {
+            except: ['webpackJsonp'],
+            // Don't care about IE8
+            screw_ie8 : true,
+          }
+        })
+      ]
+    };
+  }
 }
