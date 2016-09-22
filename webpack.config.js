@@ -41,6 +41,8 @@ var config;
 switch(process.env.npm_lifecycle_event) {
 
   case "build":
+  case 'stats':
+
   config = merge(
     common,
     {
@@ -84,4 +86,7 @@ switch(process.env.npm_lifecycle_event) {
 
 }
 
-module.exports = validate(config);
+// Run validator in quiet mode to avoid output in stats
+module.exports = validate(config, {
+  quiet: true
+});
